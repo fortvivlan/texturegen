@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "texturegen"
+version = "0.1.0"
+description = "Local SDXL LoRA training for seamless textures"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "accelerate>=1.2,<2",
+  "datasets>=3.2,<5",
+  "diffusers>=0.35,<0.41",
+  "huggingface-hub>=0.27,<2",
+  "numpy>=1.26,<3",
+  "peft>=0.14,<1",
+  "Pillow>=10,<13",
+  "safetensors>=0.4,<1",
+  "tensorboard>=2.17,<3",
+  "torch>=2.2",
+  "torchvision>=0.17",
+  "transformers>=4.46,<6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+texturegen-normalize = "texturegen.normalize:main"
+texturegen-prepare = "texturegen.data:main"
+texturegen-train = "texturegen.train:main"
+texturegen-generate = "texturegen.inference:main"
+
+[tool.setuptools.packages.find]
+include = ["texturegen*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
